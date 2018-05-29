@@ -35,10 +35,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-//    self.window.rootViewController = [[BasicMainTBVC alloc]init];
-    UserCenterViewController *VC = [[UserCenterViewController alloc]init];
-    BasicMainNC *NC = [[BasicMainNC alloc]initWithRootViewController:VC];
-    self.window.rootViewController = NC;
+    self.window.rootViewController = [[BasicMainTBVC alloc]init];
+//    UserCenterViewController *VC = [[UserCenterViewController alloc]init];
+//    BasicMainNC *NC = [[BasicMainNC alloc]initWithRootViewController:VC];
+//    self.window.rootViewController = NC;
 }
 
 -(UIImageView *)GetPortraitIMG

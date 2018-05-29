@@ -63,11 +63,12 @@
     }];
     
     UILabel *titleLable = [[UILabel alloc]init];
-    titleLable.backgroundColor = RandomColor;
+//    titleLable.backgroundColor = RandomColor;
     [self.contentView addSubview:titleLable];
     self.titleLable = titleLable;
     [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.contentView);
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).offset(10);
        
     }];
     

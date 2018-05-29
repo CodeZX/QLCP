@@ -15,7 +15,13 @@ typedef void (^action)(id cell);
 @property (nonatomic,copy)  NSString *title;
 @property (nonatomic,copy) NSString *rightName;
 @property (nonatomic,copy) action actionBlock;
+- (UserCenterTableViewCellModel *)initWithLeftImageName:(NSString *)leftImageName RightName:(NSString *)rightName  Title:(NSString *)title ActionBlock:(action)actionBlock;
 
+- (UserCenterTableViewCellModel *)initWithLeftName:(NSString *)LeftName  Title:(NSString *)title;
+
+- (UserCenterTableViewCellModel *)initWithTitle:(NSString *)title;
+
+- (UserCenterTableViewCellModel *)initWithRightName:(NSString *)rightName Title:(NSString *)title ActionBlock:(action)actionBlock;
 @end
 
 

@@ -15,6 +15,11 @@
 #import "BasicMainNC.h"
 #import "BaseTabBar.h"
 
+
+
+#import "GramophoneViewController.h"
+#import "RecordViewController.h"
+#import "UserCenterViewController.h"
 @interface BasicMainTBVC ()
 
 @end
@@ -53,8 +58,12 @@
 
 - (void)addChildViewControllers
 {
-    HomePageVC *HomeVC = [[HomePageVC alloc] init];
-    [self setChildViewController:HomeVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:kHomePageVC_Title];
+    GramophoneViewController *gramophoneVC = [[GramophoneViewController alloc] init];
+    [self setChildViewController:gramophoneVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"留声机"];
+    RecordViewController *RecordVC = [[RecordViewController alloc] init];
+    [self setChildViewController:RecordVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"录音"];
+    UserCenterViewController *UserCenterVC = [[UserCenterViewController alloc] init];
+    [self setChildViewController:UserCenterVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"我的"];
     
 }
 

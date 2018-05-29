@@ -33,7 +33,7 @@
     self.tableView   = tableView;
     [tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
-        make.size.equalTo(self.view.size);
+        make.size.equalTo(self.view);
     }];
     
     

@@ -10,19 +10,23 @@
 #import "UserModel.h"
 
 @interface UsersManager : NSObject
-@property (nonatomic,strong,readonly) NSArray <UserModel *> *users;
+//@property (nonatomic,strong,readonly) NSArray <UserModel *> *users;
 @property (nonatomic,strong,readonly) UserModel *currentUser;
 
+WMSingletonH(usersManager)
 
 
-
-+ (UsersManager *)sharedUsersManager;
+//+ (UsersManager *)sharedUsersManager;
 
 
 - (void)signUp;
-- (void)logIn;
+- (void)logInName:(NSString *)name Password:(NSString *)password completionHandler:(void (^)(BOOL error ,NSString *message))completionHandler;
 - (void)logOut;
-- (BOOL)save;
+- (BOOL)saveUserModel:(UserModel *)userModel;
+- (void)update;
+- (void)setPortrait:(UIImage *)image;
+
+
 
 - (NSString *)provingCode;
 
