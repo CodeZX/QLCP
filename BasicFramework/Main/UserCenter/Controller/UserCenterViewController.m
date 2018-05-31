@@ -68,7 +68,8 @@
 - (void)setupUI {
     
     self.view.backgroundColor = RGBCOLOR(237, 237, 237);
-    self.title = @"我的";
+
+    self.navigationItem.title = @"我的";
    
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStyleDone target:self action:nil];
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"主页" style:UIBarButtonItemStyleDone target:self action:nil];

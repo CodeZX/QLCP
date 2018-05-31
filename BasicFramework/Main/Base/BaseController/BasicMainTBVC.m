@@ -59,11 +59,11 @@
 - (void)addChildViewControllers
 {
     GramophoneViewController *gramophoneVC = [[GramophoneViewController alloc] init];
-    [self setChildViewController:gramophoneVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"留声机"];
+    [self setChildViewController:gramophoneVC Image:@"icon_phonograph_nor" selectedImage:@"icon_phonograph_pre" title:@""];
     RecordViewController *RecordVC = [[RecordViewController alloc] init];
-    [self setChildViewController:RecordVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"录音"];
+    [self setChildViewController:RecordVC Image:@"icon_add" selectedImage:@"icon_add" title:@""];
     UserCenterViewController *UserCenterVC = [[UserCenterViewController alloc] init];
-    [self setChildViewController:UserCenterVC Image:kHomePageVC_IMG selectedImage:kHomePageVC_Selected_IMG title:@"我的"];
+    [self setChildViewController:UserCenterVC Image:@"icon_my_nor" selectedImage:@"icon_my" title:@""];
     
 }
 

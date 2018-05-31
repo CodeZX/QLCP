@@ -30,6 +30,7 @@
     [[UIBarButtonItem appearance]setTitleTextAttributes:dic forState:UIControlStateNormal];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
+    
 }
 -(void)setViews
 {
