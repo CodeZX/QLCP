@@ -15,38 +15,127 @@
 @property(nonatomic, strong) AVAudioPlayer *player;
 @property (nonatomic,strong) NSString *audioName;
 
+
+@property (nonatomic,weak) UIButton *startBtn;
+@property (nonatomic,weak) UIButton *saveBtn;
+@property (nonatomic,weak) UIButton *cancelBtn;
 @end
 
 @implementation RecordViewController
-
+{
+    
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    //设置导航栏透明
+    //    [self.navigationController.navigationBar setTranslucent:true];
+    //把背景设为空
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    //处理导航栏有条线的问题
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    //    [self.tabBarController.tabBar setTranslucent:true];
+    [self.tabBarController.tabBar setBackgroundImage:[UIImage new]];
+    [self.tabBarController.tabBar setShadowImage:[UIImage new]];
+    
+    
+}
 - (void)setupUI  {
     
     self.navigationItem.title =  @"录音";
     self.view.backgroundColor = WhiteColor;
     
-    self.recordView = [[FXRecordArcView alloc] initWithFrame:CGRectMake(20, 0, 320, 320)];
+    
+    
+    
+    
+    UIImageView *bgimageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back ground"]];
+    [self.view addSubview:bgimageView];
+    [bgimageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+    
+    self.recordView = [[FXRecordArcView alloc] initWithFrame:CGRectMake((ScreenWidth - 320) /2, 0, ScreenWidth, 320)];
     [self.view addSubview:self.recordView];
     self.recordView.delegate = self;
     
-    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"btn_stop"]];
-    imageView.userInteractionEnabled = YES;
-    [self.view addSubview:imageView];
-    self.imageView = imageView;
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//    UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"btn_stop"]];
+//    imageView.userInteractionEnabled = YES;
+//    [self.view addSubview:imageView];
+//    self.imageView = imageView;
+//    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.view).offset(100);
+//        make.centerX.equalTo(self.view);
+//        make.size.equalTo(CGSizeMake(100, 100));
+//    }];
+    
+    
+    UIButton *saveBtn = [[UIButton alloc]init];
+    saveBtn.alpha = 0.2;
+//    saveBtn.backgroundColor =  RandomColor;
+    //    [Btn setTitle:@"Btn" forState:UIControlStateNormal];
+    //    [Btn setTitle:@"Btn" forState:UIControlStateSelected];
+    [saveBtn setImage:[UIImage imageNamed:@"btn_save"] forState:UIControlStateNormal];
+    [saveBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    [saveBtn addTarget:self action:@selector(saveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:saveBtn];
+    self.saveBtn = saveBtn;
+    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.view).offset(100);
         make.centerX.equalTo(self.view);
         make.size.equalTo(CGSizeMake(100, 100));
     }];
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
-    longPress.minimumPressDuration = 0.4;
-    [self.imageView addGestureRecognizer:longPress];
+    UIButton *cancelBtn = [[UIButton alloc]init];
+    cancelBtn.alpha = 0.2;
+//    cancelBtn.backgroundColor =  RandomColor;
+    //    [Btn setTitle:@"Btn" forState:UIControlStateNormal];
+    //    [Btn setTitle:@"Btn" forState:UIControlStateSelected];
+    [cancelBtn setImage:[UIImage imageNamed:@"btn_close@2x"] forState:UIControlStateNormal];
+    [cancelBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    [cancelBtn addTarget:self action:@selector(cancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cancelBtn];
+    self.cancelBtn = cancelBtn;
+    [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view).offset(100);
+        make.centerX.equalTo(self.view);
+        make.size.equalTo(CGSizeMake(100, 100));
+    }];
     
+    UIButton *startBtn = [[UIButton alloc]init];
+//    startBtn.backgroundColor =  RandomColor;
+//    [Btn setTitle:@"Btn" forState:UIControlStateNormal];
+//    [Btn setTitle:@"Btn" forState:UIControlStateSelected];
+    [startBtn setImage:[UIImage imageNamed:@"btn_stop"] forState:UIControlStateNormal];
+    [startBtn setImage:[UIImage imageNamed:@"disc"] forState:UIControlStateSelected];
+    [startBtn addTarget:self action:@selector(startBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:startBtn];
+    self.startBtn = startBtn;
+    [startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view).offset(100);
+        make.centerX.equalTo(self.view);
+        make.size.equalTo(CGSizeMake(100, 100));
+    }];
+    
+    
+    
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPress:)];
+//    longPress.minimumPressDuration = 0.4;
+//    [self.imageView addGestureRecognizer:longPress];
+    
+    
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
+//    [self.imageView addGestureRecognizer:tapGesture];
 }
 
 
@@ -97,8 +186,8 @@
    
     if (longPress.state == UIGestureRecognizerStateBegan) {
         
-        self.audioName = [self randomAudioName];
-        [self.recordView startForFilePath:[self fullPathAtCache:self.audioName]];
+        
+        
     }
     
     if (longPress.state == UIGestureRecognizerStateChanged) {
@@ -108,13 +197,130 @@
     if (longPress.state == UIGestureRecognizerStateEnded) {
         
 
-         [self.recordView commitRecording];
+        
         
     }
     
     
 }
+
+
+- (void)tapGesture:(UITapGestureRecognizer *)tapGesture {
+    
+   
+    
+}
 #pragma mark -------------------------- means ----------------------------------------
+- (void)showSaveBtnAndCancelBtn {
+    
+    
+    [self.saveBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view).offset(150);
+    }];
+    [self.cancelBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view).offset(-150);
+    }];
+    [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.saveBtn.alpha = 1;
+        self.cancelBtn.alpha = 1;
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)hideSaveBtnAndCancelBtn {
+    
+    [self.saveBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+    }];
+    [self.cancelBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+    }];
+    [UIView animateWithDuration:1.0 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.saveBtn.alpha = 0.2;
+        self.cancelBtn.alpha = 0.2;
+        [self.view layoutIfNeeded];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+}
+
+- (void)saveBtnClick:(UIButton *)btn {
+    
+    [self hideSaveBtnAndCancelBtn];
+    
+}
+
+
+- (void)cancelBtnClick:(UIButton *)btn {
+    
+    [self hideSaveBtnAndCancelBtn];
+    
+}
+- (void)startBtnClick:(UIButton *)btn {
+    
+    
+    
+    if (btn.selected) {
+        
+         [self.recordView commitRecording];
+        [self showSaveBtnAndCancelBtn];
+
+    }else {
+        
+        [self startRecord];
+        
+        
+    }
+    btn.selected = !btn.selected;
+    
+}
+
+- (void)startRecord {
+    
+    
+    [self startAnimation];
+    [self playSystemSound];
+    self.audioName = [self randomAudioName];
+    [self.recordView startForFilePath:[self fullPathAtCache:self.audioName]];
+    
+}
+
+- (void)startAnimation {
+    
+    static  int angle;
+    CGAffineTransform endAngle = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+    [UIView animateWithDuration:0.01 delay:0 options:UIViewAnimationOptionCurveLinear|UIViewAnimationOptionAllowUserInteraction  animations:^{
+        self.startBtn.transform = endAngle;
+    } completion:^(BOOL finished) {
+        if (self.startBtn.selected) {
+            angle += 2; [self startAnimation];
+        }
+        
+    }];
+}
+
+- (void)playSystemSound  {
+//    AudioServicesPlaySystemSound(1006);
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSoundWithCompletion(1057, ^{
+        
+    });
+//    SystemSoundID systemSoundID = 0;
+//
+//    NSURL *url = [[NSBundle mainBundle]URLForResource:@"123.mp4" withExtension:nil];
+//    CFURLRef urlRef = (__bridge CFURLRef)(url);
+//
+//    AudioServicesCreateSystemSoundID(urlRef, &systemSoundID);
+//    AudioServicesPlayAlertSound(systemSoundID);
+    
+}
 - (NSString *)randomAudioName {
     
     NSDate *data = [NSDate date];

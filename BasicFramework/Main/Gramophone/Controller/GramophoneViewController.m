@@ -56,25 +56,24 @@ static NSString *audioPath = @"QLCP";
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
-//    tableView.emptyDataSetSource = self;
+    tableView.emptyDataSetSource = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
-        make.top.equalTo(self.view).offset(-64);
+        make.top.equalTo(self.view);
         make.right.bottom.equalTo(self.view);
     }];
     [self.tableView registerNib:[UINib nibWithNibName:@"GramophoneTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:Identifier];
 
     UIImageView *imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg"]];
+    imageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300);
     [self.view addSubview:imageView];
     self.headerView = imageView;
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH, 300));
-        
-    }];
     self.tableView.tableHeaderView = self.headerView;
-    self.tableView.tableHeaderView = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    self.tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    [self.tableView.mj_header beginRefreshing];
+    
 }
 
 #pragma mark -------------------------- means ----------------------------------------
@@ -123,7 +122,7 @@ static NSString *audioPath = @"QLCP";
     NSFileManager *fm = [NSFileManager defaultManager];
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
     NSString *directoryPath = [documentPath stringByAppendingPathComponent:audioPath];
-    if (![fm fileExistsAtPath:directoryPath]) {
+    if ([fm fileExistsAtPath:directoryPath]) {
         return directoryPath;
     }
     return nil;
@@ -131,7 +130,8 @@ static NSString *audioPath = @"QLCP";
 #pragma mark respond  means
 - (void)loadNewData {
     
-//    [self.tableView.tableHeaderView ]
+    [self.tableView.mj_header endRefreshing];
+    
     self.dataSource = (NSMutableArray *) [self getAllFileByName:[self getAudiosPath]];
    
     [self.tableView reloadData];
@@ -177,6 +177,14 @@ static NSString *audioPath = @"QLCP";
 ////    return headerview;
 //}
 
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    
+    NSAttributedString *str = [[NSAttributedString alloc]initWithString:@"还没有留言哦！"];
+  
+    return str;
+    
+}
 #pragma mark -------------------------- lazy load ----------------------------------------
 
 - (NSMutableArray *)dataSource {

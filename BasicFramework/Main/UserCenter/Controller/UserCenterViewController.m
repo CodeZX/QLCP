@@ -85,7 +85,7 @@
         make.width.equalTo(SCREEN_WIDTH);
         make.height.equalTo(backimageViewHeight);
     }];
-    backImageView.backgroundColor = [UIColor redColor];
+//    backImageView.backgroundColor = [UIColor redColor];
     
 
     

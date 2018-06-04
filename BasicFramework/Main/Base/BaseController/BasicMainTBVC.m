@@ -16,7 +16,7 @@
 #import "BaseTabBar.h"
 
 
-
+#import "GramophoneViewControllerTwo.h"
 #import "GramophoneViewController.h"
 #import "RecordViewController.h"
 #import "UserCenterViewController.h"
@@ -58,7 +58,7 @@
 
 - (void)addChildViewControllers
 {
-    GramophoneViewController *gramophoneVC = [[GramophoneViewController alloc] init];
+    GramophoneViewControllerTwo *gramophoneVC = [[GramophoneViewControllerTwo alloc] init];
     [self setChildViewController:gramophoneVC Image:@"icon_phonograph_nor" selectedImage:@"icon_phonograph_pre" title:@""];
     RecordViewController *RecordVC = [[RecordViewController alloc] init];
     [self setChildViewController:RecordVC Image:@"icon_add" selectedImage:@"icon_add" title:@""];
