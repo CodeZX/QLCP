@@ -31,4 +31,5 @@ target ‘BasicFramework’ do
   pod 'SVProgressHUD'
   pod 'JPush'
   pod 'DZNEmptyDataSet'
+  pod 'YYCache'
 end

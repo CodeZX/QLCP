@@ -8,6 +8,16 @@
 
 #import "RecordViewController.h"
 #import "FXRecordArcView.h"
+#import "AudioModel.h"
+
+
+typedef NS_ENUM(NSUInteger, AudioState) {
+    AudioStateMarch,
+    AudioStateEnd,
+    AudioStateBegin
+};
+
+
 
 @interface RecordViewController ()<FXRecordArcViewDelegate,AVAudioPlayerDelegate>
 @property (nonatomic,strong) FXRecordArcView *recordView;
@@ -19,13 +29,12 @@
 @property (nonatomic,weak) UIButton *startBtn;
 @property (nonatomic,weak) UIButton *saveBtn;
 @property (nonatomic,weak) UIButton *cancelBtn;
+
+@property (nonatomic,assign) AudioState audioState;
 @end
 
 @implementation RecordViewController
-{
-    
-    
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
@@ -51,10 +60,10 @@
     
     self.navigationItem.title =  @"录音";
     self.view.backgroundColor = WhiteColor;
+    self.audioState = AudioStateEnd;
     
-    
-    
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+    ;    [self.navigationController.navigationBar setTintColor:WhiteColor];
     
     UIImageView *bgimageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"back ground"]];
     [self.view addSubview:bgimageView];
@@ -139,26 +148,54 @@
 }
 
 
+- (void)share {
+    
+    //分享的标题
+    NSString *textToShare = @"情侣CP";
+    //分享的图片
+//    UIImage *imageToShare = [UIImage imageNamed:@"312.jpg"];
+    //分享的url
+//    NSURL *urlToShare = [NSURL URLWithString:@"http://www.baidu.com"];
+    //在这里呢 如果想分享图片 就把图片添加进去  文字什么的通上
+//    NSArray *activityItems = @[textToShare,imageToShare, urlToShare];
+    NSArray *activityItems = @[textToShare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]initWithActivityItems:activityItems applicationActivities:nil];
+    //不出现在活动项目
+    activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll];
+    [self presentViewController:activityVC animated:YES completion:nil];
+    // 分享之后的回调
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        if (completed) {
+            NSLog(@"completed");
+            //分享 成功
+        } else  {
+            NSLog(@"cancled");
+            //分享 取消
+        }
+    };
+    
+}
+
 #pragma mark -------------------------- recordarcView delegate ----------------------------------------
 - (void)recordArcView:(FXRecordArcView *)arcView voiceRecorded:(NSString *)recordPath length:(float)recordLength {
 
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"录音" message:@"111" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"试听" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[self fullPathAtCache:self.audioName]] error:nil];
-        self.player.delegate = self;
-        [self.player play];
-    }];
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self removeAudio];
-    }];
-   
-    [alert addAction:action];
-    [alert addAction:actionCancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"录音" message:@"111" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"试听" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[self fullPathAtCache:self.audioName]] error:nil];
+//        self.player.delegate = self;
+//        [self.player play];
+//    }];
+//    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//        [self removeAudio];
+//    }];
+//
+//    [alert addAction:action];
+//    [alert addAction:actionCancel];
+//
+//    [self presentViewController:alert animated:YES completion:nil];
 //    [self showToast:recordPath];
     
 
@@ -167,19 +204,19 @@
 #pragma mark -------------------------- audioPlayer delegate ----------------------------------------
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否保存？" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self saveAudio];
-        
-    }];
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-         [self removeAudio];
-    }];
-    
-    [alert addAction:action];
-    [alert addAction:actionCancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否保存？" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self saveAudio];
+//
+//    }];
+//    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//         [self removeAudio];
+//    }];
+//
+//    [alert addAction:action];
+//    [alert addAction:actionCancel];
+//
+//    [self presentViewController:alert animated:YES completion:nil];
     
 }
 - (void)longPress:(UILongPressGestureRecognizer *)longPress {
@@ -254,31 +291,41 @@
 - (void)saveBtnClick:(UIButton *)btn {
     
     [self hideSaveBtnAndCancelBtn];
-    
+    [self saveAudio];
+    NSString *path = [self fullPathAtDocument:self.audioName];
+    AudioModel *avdioModel = [[AudioModel alloc]initWithTitle:@"我就是标题" Path:path];
+    AudioManager *audioManager = [AudioManager sharedAudioManager];
+    YYCache *audioCache = audioManager.audioCache;
+    [audioCache setObject:avdioModel forKey:path];
+
+    AudioModel *avdioModel1 = (AudioModel *) [audioCache objectForKey:path];
+    NSLog(@"zxzxzxzxxzxz%@",avdioModel1.path);
 }
 
 
 - (void)cancelBtnClick:(UIButton *)btn {
     
     [self hideSaveBtnAndCancelBtn];
+    [self removeAudio];
+    
     
 }
+
 - (void)startBtnClick:(UIButton *)btn {
     
-    
-    
-    if (btn.selected) {
-        
-         [self.recordView commitRecording];
-        [self showSaveBtnAndCancelBtn];
-
-    }else {
-        
+    if (self.audioState == AudioStateEnd) {
         [self startRecord];
+        btn.selected = YES;
+        self.audioState = AudioStateMarch;
         
+    }else if(self.audioState == AudioStateMarch){
+        [self.recordView commitRecording];
+        [self showSaveBtnAndCancelBtn];
+        btn.selected = NO;
+        self.audioState = AudioStateEnd;
         
     }
-    btn.selected = !btn.selected;
+
     
 }
 

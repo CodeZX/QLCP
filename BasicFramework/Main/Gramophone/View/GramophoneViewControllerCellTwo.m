@@ -104,7 +104,7 @@
     
 }
 
-- (void)setAvdioModel:(AvdioModel *)avdioModel {
+- (void)setAvdioModel:(AudioModel *)avdioModel {
     _avdioModel = avdioModel;
    
     

@@ -90,6 +90,7 @@
 		18321FC520C52DDF0067BE66 /* btn_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 18321FBF20C52DDC0067BE66 /* btn_save.png */; };
 		18321FC620C52DDF0067BE66 /* btn_save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18321FC020C52DDD0067BE66 /* btn_save@2x.png */; };
 		18321FC720C52DDF0067BE66 /* btn_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18321FC120C52DDE0067BE66 /* btn_close@3x.png */; };
+		18321FCB20C694F80067BE66 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18321FCA20C694F80067BE66 /* AudioManager.m */; };
 		1859A52220A1529B00FFB7EF /* SDLaunchWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859A4FB20A1529B00FFB7EF /* SDLaunchWebViewController.m */; };
 		1859A52320A1529B00FFB7EF /* SDLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859A4FC20A1529B00FFB7EF /* SDLaunchViewController.m */; };
 		1859A52420A1529B00FFB7EF /* 进入应用.png in Resources */ = {isa = PBXBuildFile; fileRef = 1859A4FE20A1529B00FFB7EF /* 进入应用.png */; };
@@ -100,7 +101,7 @@
 		18B1CF8920BCF05E002AEBFF /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF8820BCF05E002AEBFF /* RecordViewController.m */; };
 		18B1CF8D20BD3289002AEBFF /* GramophoneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF8B20BD3289002AEBFF /* GramophoneTableViewCell.m */; };
 		18B1CF8E20BD328A002AEBFF /* GramophoneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B1CF8C20BD3289002AEBFF /* GramophoneTableViewCell.xib */; };
-		18B1CF9120BD40BB002AEBFF /* AvdioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF9020BD40BB002AEBFF /* AvdioModel.m */; };
+		18B1CF9120BD40BB002AEBFF /* AudioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF9020BD40BB002AEBFF /* AudioModel.m */; };
 		18B1CFB620BD4A61002AEBFF /* GBAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF9820BD4A60002AEBFF /* GBAboutViewController.m */; };
 		18B1CFB720BD4A61002AEBFF /* UserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF9920BD4A60002AEBFF /* UserCenterViewController.m */; };
 		18B1CFB820BD4A61002AEBFF /* GBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1CF9A20BD4A60002AEBFF /* GBSettingViewController.m */; };
@@ -366,6 +367,8 @@
 		18321FBF20C52DDC0067BE66 /* btn_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_save.png; sourceTree = "<group>"; };
 		18321FC020C52DDD0067BE66 /* btn_save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_save@2x.png"; sourceTree = "<group>"; };
 		18321FC120C52DDE0067BE66 /* btn_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close@3x.png"; sourceTree = "<group>"; };
+		18321FC920C694F80067BE66 /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		18321FCA20C694F80067BE66 /* AudioManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		1859A4FB20A1529B00FFB7EF /* SDLaunchWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLaunchWebViewController.m; sourceTree = "<group>"; };
 		1859A4FC20A1529B00FFB7EF /* SDLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLaunchViewController.m; sourceTree = "<group>"; };
 		1859A4FD20A1529B00FFB7EF /* SDLaunchWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLaunchWebViewController.h; sourceTree = "<group>"; };
@@ -384,8 +387,8 @@
 		18B1CF8A20BD3289002AEBFF /* GramophoneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GramophoneTableViewCell.h; sourceTree = "<group>"; };
 		18B1CF8B20BD3289002AEBFF /* GramophoneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GramophoneTableViewCell.m; sourceTree = "<group>"; };
 		18B1CF8C20BD3289002AEBFF /* GramophoneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GramophoneTableViewCell.xib; sourceTree = "<group>"; };
-		18B1CF8F20BD40BB002AEBFF /* AvdioModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvdioModel.h; sourceTree = "<group>"; };
-		18B1CF9020BD40BB002AEBFF /* AvdioModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AvdioModel.m; sourceTree = "<group>"; };
+		18B1CF8F20BD40BB002AEBFF /* AudioModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioModel.h; sourceTree = "<group>"; };
+		18B1CF9020BD40BB002AEBFF /* AudioModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioModel.m; sourceTree = "<group>"; };
 		18B1CF9420BD4A60002AEBFF /* UserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterViewController.h; sourceTree = "<group>"; };
 		18B1CF9520BD4A60002AEBFF /* GBRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBRecordViewController.h; sourceTree = "<group>"; };
 		18B1CF9620BD4A60002AEBFF /* GBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBSettingViewController.h; sourceTree = "<group>"; };
@@ -812,6 +815,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		18321FC820C694CF0067BE66 /* AvdioManager */ = {
+			isa = PBXGroup;
+			children = (
+				18321FC920C694F80067BE66 /* AudioManager.h */,
+				18321FCA20C694F80067BE66 /* AudioManager.m */,
+			);
+			path = AvdioManager;
+			sourceTree = "<group>";
+		};
 		1859A4FA20A1529B00FFB7EF /* SDLaunch(引导页) */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +881,7 @@
 		18B1CF8320BCEFFD002AEBFF /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				18321FC820C694CF0067BE66 /* AvdioManager */,
 				18321EFE20BE50360067BE66 /* Resource */,
 				18B1CF8420BCEFFD002AEBFF /* Controller */,
 				18B1CF8520BCEFFD002AEBFF /* Model */,
@@ -889,8 +902,8 @@
 		18B1CF8520BCEFFD002AEBFF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18B1CF8F20BD40BB002AEBFF /* AvdioModel.h */,
-				18B1CF9020BD40BB002AEBFF /* AvdioModel.m */,
+				18B1CF8F20BD40BB002AEBFF /* AudioModel.h */,
+				18B1CF9020BD40BB002AEBFF /* AudioModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2276,6 +2289,7 @@
 				367521861E4D5A4900F2117C /* UINavigationBar+NightVersion.m in Sources */,
 				3679AA0E1DD9846700169DFF /* MainModel.m in Sources */,
 				3679AABD1DDDB7B800169DFF /* UIScrollView+Extension.m in Sources */,
+				18321FCB20C694F80067BE66 /* AudioManager.m in Sources */,
 				3679AAA41DDDB62F00169DFF /* UIBarButtonItem+Extension.m in Sources */,
 				3675218C1E4D5A4900F2117C /* UITableView+BackgroundColor.m in Sources */,
 				36A5303A1E8112220067F8F7 /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -2333,7 +2347,7 @@
 				18B1CFB720BD4A61002AEBFF /* UserCenterViewController.m in Sources */,
 				367A5E171E7FC8D60026EC3D /* BaseModel.m in Sources */,
 				3675217A1E4D5A4900F2117C /* UIViewController+ChangeColor.m in Sources */,
-				18B1CF9120BD40BB002AEBFF /* AvdioModel.m in Sources */,
+				18B1CF9120BD40BB002AEBFF /* AudioModel.m in Sources */,
 				181DEE1620B8077500507AE4 /* TKProgressBarView.m in Sources */,
 				1859A52320A1529B00FFB7EF /* SDLaunchViewController.m in Sources */,
 				367521801E4D5A4900F2117C /* UIBarButtonItem+TintColor.m in Sources */,

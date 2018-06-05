@@ -8,7 +8,7 @@
 
 #import "GramophoneViewController.h"
 #import "GramophoneTableViewCell.h"
-#import "AvdioModel.h"
+#import "AudioModel.h"
 
 
 static NSString *Identifier = @"GramophoneTableViewCell";
